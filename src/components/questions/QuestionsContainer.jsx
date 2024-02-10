@@ -5,7 +5,12 @@ import Questions from './Questions';
 import axios from 'axios';
 import io from 'socket.io-client';
 
-const socket = io("http://localhost:3000"); // Connect to the server
+const socket = io("http://localhost:3000", {
+    withCredentials: true,
+    extraHeaders: {
+        "my-custom-header": "abcd"
+    }
+}); // Connect to the server
 console.log(socket);
 
 // const questions = [
