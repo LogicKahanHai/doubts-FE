@@ -31,7 +31,6 @@ const QuestionsContainer = () => {
     const [connected, setConnected] = useState(false);
 
     const handleSubmit = (e) => {
-        e.preventDefault();
         if (sender.msg) {
             console.log(sender);
             socket.emit("newMessage", sender);
