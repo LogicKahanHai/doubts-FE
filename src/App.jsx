@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto d-flex justify-content-center">
+      <div className="container d-flex justify-content-center">
         <div className='d-block'>
           <h1>Welcome {"{name}"}</h1>
           <p className="text-muted">

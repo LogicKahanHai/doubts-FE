@@ -34,7 +34,7 @@ const QuestionsContainer = () => {
         if (sender.msg) {
             console.log(sender);
             socket.emit("newMessage", sender);
-            setQuestions((prevMessages) => [...prevMessages, sender]);
+            setQuestions((prevMessages) => [sender, ...prevMessages]);
             setSender({ ...sender, msg: "" });
         }
         setValue('');
@@ -71,7 +71,7 @@ const QuestionsContainer = () => {
 
         // Listen for "newMessage" events from the server
         socket.on("newMessage", (msg) => {
-            setQuestions((prevMessages) => [...prevMessages, msg]);
+            setQuestions((prevMessages) => [msg, ...prevMessages]);
         });
 
         // Clean up event listeners when component unmounts
