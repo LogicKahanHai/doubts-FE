@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 import useSound from 'use-sound';
 import sound from '../../assets/abe_yaar.mp3';
 
-const flag = true;
+const flag = false;
 let url = "";
 
 if (flag) {
