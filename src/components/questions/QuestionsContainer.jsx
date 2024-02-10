@@ -4,8 +4,19 @@ import { useState, useEffect } from 'react';
 import Questions from './Questions';
 import axios from 'axios';
 import io from 'socket.io-client';
+import useSound from 'use-sound';
+import sound from '../../assets/abe_yaar.mp3';
 
-const socket = io("http://13.233.79.221:3000"); // Connect to the server
+const flag = true;
+let url = "";
+
+if (flag) {
+    url = "http://localhost:3000";
+} else {
+    url = "http://13.233.79.221:3000";
+}
+
+const socket = io(url); // Connect to the server
 console.log(socket);
 
 // const questions = [
@@ -19,23 +30,20 @@ console.log(socket);
 //     },
 //     // Add more dummy questions here...
 // ];
-const QuestionsContainer = () => {
+const QuestionsContainer = ({ sender, setSender }) => {
     const [value, setValue] = useState('');
-    const [sender, setSender] = useState({
-        name: "Anonymous",
-        msg: "",
-        email: "i.love.aws@gmail.com"
-    });
+
+    const [playSound] = useSound(sound);
 
     const [questions, setQuestions] = useState([]);
     const [connected, setConnected] = useState(false);
 
     const handleSubmit = (e) => {
         if (sender.msg) {
-            console.log(sender);
+            sender.time = new Date();
             socket.emit("newMessage", sender);
             setQuestions((prevMessages) => [sender, ...prevMessages]);
-            setSender({ ...sender, msg: "" });
+            setSender({ ...sender, msg: "", time: null });
         }
         setValue('');
     }
@@ -54,7 +62,7 @@ const QuestionsContainer = () => {
 
     useEffect(() => {
 
-        axios.get("http://13.233.79.221:3000/loadMsgs").then((res) => {
+        axios.get(url + "/loadMsgs").then((res) => {
             setQuestions(res.data);
         });
 
@@ -72,6 +80,7 @@ const QuestionsContainer = () => {
         // Listen for "newMessage" events from the server
         socket.on("newMessage", (msg) => {
             setQuestions((prevMessages) => [msg, ...prevMessages]);
+            playSound();
         });
 
         // Clean up event listeners when component unmounts

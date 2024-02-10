@@ -1,6 +1,17 @@
 import React from 'react';
+import { useState } from 'react';
 
 const Input = ({ sender, handleChange, handleSubmit, value }) => {
+    const [slowmode, setSlowmode] = useState(false);
+
+    const handleSlowmode = (e) => {
+        handleSubmit(e);
+        setSlowmode(true);
+        setTimeout(() => {
+            setSlowmode(false);
+        }, 60000);
+    }
+
     return (
         <div>
             <textarea
@@ -13,7 +24,7 @@ const Input = ({ sender, handleChange, handleSubmit, value }) => {
                 placeholder="Ask your question here..."
             />
             <div className="d-flex justify-content-end">
-                <button onClick={handleSubmit} className="btn btn-primary mt-2">Submit</button>
+                <button disabled={slowmode} onClick={handleSlowmode} className={slowmode ? "btn btn-disabled mt-2" : "btn btn-primary mt-2"}>{slowmode ? "Slowmode active..." : "Submit"}</button>
             </div>
         </div>
     );
