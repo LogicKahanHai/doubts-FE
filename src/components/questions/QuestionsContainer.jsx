@@ -5,12 +5,7 @@ import Questions from './Questions';
 import axios from 'axios';
 import io from 'socket.io-client';
 
-const socket = io("http://localhost:3000", {
-    withCredentials: true,
-    extraHeaders: {
-        "my-custom-header": "abcd"
-    }
-}); // Connect to the server
+const socket = io("http://13.233.79.221:3000"); // Connect to the server
 console.log(socket);
 
 // const questions = [
@@ -46,7 +41,6 @@ const QuestionsContainer = () => {
     }
 
     const updateSender = (e) => {
-        e.preventDefault();
         console.log(e.target);
         setSender({ ...sender, [e.target.name]: e.target.value });
         console.log(sender);
@@ -60,7 +54,7 @@ const QuestionsContainer = () => {
 
     useEffect(() => {
 
-        axios.get("http://localhost:3000/loadMsgs").then((res) => {
+        axios.get("http://13.233.79.221:3000/loadMsgs").then((res) => {
             setQuestions(res.data);
         });
 
