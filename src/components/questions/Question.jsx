@@ -10,7 +10,7 @@ const Question = ({ user }) => {
             <div className="user-details">
                 {/* <img src={user.avatar} alt={user.name} className="avatar" /> */}
 
-                <span className="username"><strong>{user.name}</strong> - <i>{showDate} @ {showTime} {amOrPm}</i></span>
+                <span className="username"><strong>{user.name}</strong> - <i>{showDate} @ {showTime} {showTime.endsWith('am') || showTime.endsWith('pm') || amOrPm}</i></span>
             </div>
             <div className="question-text">{user.msg}</div>
         </div>
