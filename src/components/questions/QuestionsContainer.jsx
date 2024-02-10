@@ -7,7 +7,8 @@ import io from 'socket.io-client';
 import useSound from 'use-sound';
 import sound from '../../assets/abe_yaar.mp3';
 
-const flag = false;
+
+const flag = true;
 let url = "";
 
 if (flag) {
@@ -63,7 +64,11 @@ const QuestionsContainer = ({ sender, setSender }) => {
     useEffect(() => {
 
         axios.get(url + "/loadMsgs").then((res) => {
-            setQuestions(res.data);
+            let msgs = res.data;
+            msgs.sort((a, b) => {
+                return new Date(b.time) - new Date(a.time);
+            });
+            setQuestions(msgs);
         });
 
         // Listen for "connected" event from the server

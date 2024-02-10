@@ -3,14 +3,21 @@ import './App.css'
 import QuestionsContainer from './components/questions/QuestionsContainer'
 import { useState } from 'react'
 import UserDetails from './components/UserDetails';
+import { useEffect } from 'react';
 
 function App() {
   const [sender, setSender] = useState({
-    name: "",
+    name: localStorage.getItem('senderName') ? localStorage.getItem('senderName') : "",
     msg: "",
-    email: "",
+    email: localStorage.getItem('senderEmail') ? localStorage.getItem('senderEmail') : "",
     time: null,
   });
+
+  useEffect(() => {
+    localStorage.setItem('senderName', sender.name);
+    localStorage.setItem('senderEmail', sender.email);
+  }, [sender.name, sender.email]);
+
 
   const addSender = (name, email) => {
     console.log(name, email);
@@ -36,7 +43,7 @@ function App() {
       <Navbar />
       {console.log(sender)}
       <div id='overlay' style={overlayStyle}>
-        <UserDetails addSender={addSender} prevName={sender.name} prevEmail={sender.email} />
+        <UserDetails addSender={addSender} prevName={localStorage.getItem("senderName")} prevEmail={localStorage.getItem("senderEmail")} />
       </div>
       <div className="container d-flex justify-content-center">
         <div className='d-block'>
