@@ -37,6 +37,7 @@ const QuestionsContainer = () => {
             setQuestions((prevMessages) => [...prevMessages, sender]);
             setSender({ ...sender, msg: "" });
         }
+        setValue('');
     }
 
     const updateSender = (e) => {
