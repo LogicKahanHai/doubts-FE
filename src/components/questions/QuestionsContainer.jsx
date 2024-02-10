@@ -85,7 +85,7 @@ const QuestionsContainer = ({ sender, setSender }) => {
         // Listen for "newMessage" events from the server
         socket.on("newMessage", (msg) => {
             setQuestions((prevMessages) => [msg, ...prevMessages]);
-            playSound();
+            new Audio(sound).play();
         });
 
         // Clean up event listeners when component unmounts
