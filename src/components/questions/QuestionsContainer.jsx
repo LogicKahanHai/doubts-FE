@@ -7,6 +7,7 @@ import io from 'socket.io-client';
 import useSound from 'use-sound';
 import sound from '../../assets/abe_yaar.mp3';
 
+const ip = "52.66.253.81"
 
 const flag = false;
 let url = "";
@@ -14,7 +15,7 @@ let url = "";
 if (flag) {
     url = "http://localhost:3000";
 } else {
-    url = "http://13.233.79.221:3000";
+    url = "http://" + ip + ":3000";
 }
 
 const socket = io(url); // Connect to the server
