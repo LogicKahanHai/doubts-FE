@@ -9,7 +9,7 @@ const Input = ({ sender, handleChange, handleSubmit, value }) => {
         setSlowmode(true);
         setTimeout(() => {
             setSlowmode(false);
-        }, 60000);
+        }, 10000);
     }
 
     return (
